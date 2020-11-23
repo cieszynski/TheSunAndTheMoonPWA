@@ -1,5 +1,5 @@
 [{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "de.cieszynski.thesunthemoon",
-               "sha256_cert_fingerprints": ["E0:46:81:D3:5C:3B:80:15:2B:AC:E1:90:36:54:56:E4:A0:4D:15:D2:EE:B6:B0:31:51:98:6B:4F:65:8B:A5:1A"] }
-}]
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "de.cieszynski.thesunthemoon",
+                 "sha256_cert_fingerprints": ["E0:46:81:D3:5C:3B:80:15:2B:AC:E1:90:36:54:56:E4:A0:4D:15:D2:EE:B6:B0:31:51:98:6B:4F:65:8B:A5:1A"] }
+  }]
