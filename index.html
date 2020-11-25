@@ -10,10 +10,38 @@
 
     </style>
 </head>
+<script>
+
+    function draw() {
+        //console.error(lat);
+        document.querySelector('#out').textContent = lat
+    }
+
+    function doit() {
+
+        navigator.geolocation.watchPosition(
+            function (result) {
+                lat = result.coords.latitude;
+                lon = result.coords.longitude;
+
+                requestAnimationFrame(draw);
+            },
+            function (error) {
+                switch (error.code) {
+                    case 0: // GeolocationPositionError.PERMISSION_DENIED:
+                    case 1: // GeolocationPositionError.POSITION_UNAVAILABLE:
+                    case 2: // GeolocationPositionError.TIMEOUT:
+                        console.error(error.code);
+                }
+            }
+        );
+    }
+</script>
 
 <body>
     <h1>The Sun &amp; The Moon</h1>
     <p id="out">---</p>
+    <button onclick="doit()">doit</button>
 </body>
 <script>
     let lat = 0;
@@ -25,27 +53,6 @@
         }
     });
 
-    function draw() {
-        //console.error(lat);
-        document.querySelector('#out').textContent = lat
-    }
-
-    navigator.geolocation.watchPosition(
-        function (result) {
-            lat = result.coords.latitude;
-            lon = result.coords.longitude;
-
-            requestAnimationFrame(draw);
-        },
-        function (error) {
-            switch (error.code) {
-                case 0: // GeolocationPositionError.PERMISSION_DENIED:
-                case 1: // GeolocationPositionError.POSITION_UNAVAILABLE:
-                case 2: // GeolocationPositionError.TIMEOUT:
-                    console.error(error.code);
-            }
-        }
-    );
 </script>
 
 </html>
