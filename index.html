@@ -7,10 +7,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="manifest" href="/manifest.webmanifest">
     <style>
-
+        #starmap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
 </head>
 <script>
+    var planetarium;
 
     function draw() {
         //console.error(lat);
@@ -23,8 +30,8 @@
             function (result) {
                 lat = result.coords.latitude;
                 lon = result.coords.longitude;
-
-                requestAnimationFrame(draw);
+                planetarium.setLatitude(lat);
+                planetarium.setLongitude(lon);
             },
             function (error) {
                 switch (error.code) {
@@ -38,19 +45,38 @@
     }
 </script>
 
-<body>
+<script src="virtualsky/stuquery.js"></script>
+<script src="virtualsky/virtualsky.js" type="text/javascript"></script>
+
+<body onclick="doit()">
     <h1>The Sun &amp; The Moon</h1>
-    <p id="out">---</p>
+    <p id="out">---</p>1
     <button onclick="doit()">doit</button>
+    <div id="starmap"></div>
 </body>
 <script>
     let lat = 0;
     let lon = 0;
 
+
     window.addEventListener("load", () => {
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("service-worker.js");
         }
+
+        planetarium = S.virtualsky({
+        id: 'starmap',	// This should match the ID used in the DOM
+        projection: 'lambert',
+        longitude: lon,
+        latitude: lat,
+        live: true,
+        ground: true,
+        constellations: true,
+        constellationlabels: true,
+        scalestars: 2,
+        fontsize: 6,
+        fontfamily: 'sans-serif'
+	});
     });
 
 </script>
